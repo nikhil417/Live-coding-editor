@@ -10,7 +10,7 @@ const app = express();
 
 const port = 3000;
 
-app.use(methodOverride());
+app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -25,12 +25,31 @@ app.get("/", (req, res) => {
 
     const messages = rows.map((row) => row.message);
 
-    res.render("index", { messages });
+    // res.send(rows);
+    res.render("index", { rows });
   });
 });
 
-app.post("/new", (req, res) => {
-  query = `INSERT INTO messages (message) VALUES ('${req.body.msg}')`;
+app.post("/msg", (req, res) => {
+  const { msg } = req.body;
+  query = `INSERT INTO messages (message) VALUES ('${msg}')`;
+  connection.query(query, function (err, rows, fields) {
+    if (err) {
+      console.log(msg);
+      console.log(msg.length);
+      if (msg.length > 255) {
+        res.status(500).send("Char limit reched");
+      }
+      res.status(404).send(err);
+    }
+
+    res.redirect("/");
+  });
+});
+
+app.delete("/msg/:id", (req, res) => {
+  const { id } = req.params;
+  query = `DELETE FROM messages WHERE id=${id}`;
   connection.query(query, function (err, rows, fields) {
     if (err) throw err;
 

@@ -69,11 +69,14 @@ html {
 
   display: inline-block;
   border-radius: 20px;
+
+  transition: all 0.25s ease-in;
 }
 
 .btn:hover,
 .btn:active {
   background-color: #3fe2f7;
+  padding: 1.7rem 1.2rem;
 }
 
 .sub-msg {
@@ -99,6 +102,23 @@ html {
   position: relative;
   font-size: 1.5rem;
   padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete-msg {
+  background-color: #4ec3d3;
+  text-decoration: none;
+  border: none;
+}
+
+.trash-icon {
+  width: 2rem;
+  height: 2rem;
+  color: rgb(185, 237, 244);
+  stroke: #032e34;
+  cursor: pointer;
 }
 
 .message::after {
@@ -111,4 +131,9 @@ html {
   position: absolute;
   transform: translate(-50%, 0);
   width: 40rem;
+}
+
+footer {
+  padding-top: 20px;
+  height: 10px;
 }
