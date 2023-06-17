@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const path = require("path");
 
 const app = express();
