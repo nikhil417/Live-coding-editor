@@ -57,6 +57,10 @@ router.delete("/msg/:id", (req, res) => {
   });
 });
 
+app.listen(port, () => {
+  console.log("Listening at port 3000");
+});
+
 app.use("/.netlify/functions/api", router);
 
 module.exports.handler = serverless(app);
