@@ -4,7 +4,8 @@
   "description": "https://excalidraw.com/#json=omWro9D27-pvy_pMTbGdl,3WDskRQTaFXqqHyh3FPdHA",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "netlify-lambda serve src",
+    "build": "netlify-lambda build src"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,14 @@
     "express": "^4.18.2",
     "method-override": "^3.0.0",
     "mysql2": "^3.3.5",
-    "nodemon": "^2.0.22"
-  }
+    "netlify-lambda": "^2.0.16",
+    "nodemon": "^2.0.22",
+    "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "babel-loader": "^9.1.2"
+  },
+  "keywords": []
 }
