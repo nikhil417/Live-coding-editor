@@ -1,16 +1,5 @@
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
-        },
-      },
-    ],
+  optimization: {
+    minimize: false, // mangle false else mysql blow ups with "PROTOCOL_INCORRECT_PACKET_SEQUENCE"
   },
 };

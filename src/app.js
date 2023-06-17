@@ -4,9 +4,8 @@ const express = require("express");
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const mysql = require("mysql2");
+const mysql = require("mysql");
 const path = require("path");
-const ejs = require("ejs").__express;
 
 const app = express();
 const router = express.Router();
@@ -19,7 +18,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.set("view engine", "ejs");
 app.engine("ejs", require("ejs").__express);
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(process.cwd(), "src/views"));
 
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM messages", function (err, rows, fields) {
@@ -57,10 +56,6 @@ router.delete("/msg/:id", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log("Listening at port 3000");
-});
-
-app.use("/.netlify/functions/api", router);
+app.use("/.netlify/functions/app", router);
 
 module.exports.handler = serverless(app);
