@@ -1,26 +1,24 @@
 require("dotenv").config();
 
 const express = require("express");
-const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const mysql = require("mysql");
 const path = require("path");
 
 const app = express();
-const router = express.Router();
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 const port = 3000;
 
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(process.cwd(), "src/public")));
 
 app.set("view engine", "ejs");
 app.engine("ejs", require("ejs").__express);
 app.set("views", path.join(process.cwd(), "src/views"));
 
-router.get("/", (req, res) => {
+app.get("/", (req, res) => {
   connection.query("SELECT * FROM messages", function (err, rows, fields) {
     if (err) throw err;
 
@@ -29,7 +27,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/msg", (req, res) => {
+app.post("/msg", (req, res) => {
   const { msg } = req.body;
   query = `INSERT INTO messages (message) VALUES ('${msg}')`;
 
@@ -45,7 +43,7 @@ router.post("/msg", (req, res) => {
   });
 });
 
-router.delete("/msg/:id", (req, res) => {
+app.delete("/msg/:id", (req, res) => {
   const { id } = req.params;
   query = `DELETE FROM messages WHERE id=${id}`;
 
@@ -56,6 +54,6 @@ router.delete("/msg/:id", (req, res) => {
   });
 });
 
-app.use("/.netlify/functions/app", router);
-
-module.exports.handler = serverless(app);
+app.listen(port, () => {
+  console.log("listening");
+});

@@ -4,7 +4,7 @@
   "description": "https://excalidraw.com/#json=omWro9D27-pvy_pMTbGdl,3WDskRQTaFXqqHyh3FPdHA",
   "main": "index.js",
   "scripts": {
-    "start": "netlify-lambda serve src",
+    "start": "node src/app.js",
     "build": "netlify-lambda build src --config ./webpack.config.js"
   },
   "repository": {
@@ -32,7 +32,9 @@
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
-    "babel-loader": "^9.1.2"
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.8.1",
+    "mini-css-extract-plugin": "^2.7.6"
   },
   "keywords": []
 }
