@@ -4,8 +4,7 @@
   "description": "https://excalidraw.com/#json=omWro9D27-pvy_pMTbGdl,3WDskRQTaFXqqHyh3FPdHA",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
-    "build": "netlify-lambda build src --config ./webpack.config.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
