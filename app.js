@@ -12,11 +12,11 @@ const port = 3000;
 
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(process.cwd(), "src/public")));
+app.use(express.static(path.join(process.cwd(), "public")));
 
 app.set("view engine", "ejs");
 app.engine("ejs", require("ejs").__express);
-app.set("views", path.join(process.cwd(), "src/views"));
+app.set("views", path.join(process.cwd(), "views"));
 
 app.get("/", (req, res) => {
   connection.query("SELECT * FROM messages", function (err, rows, fields) {
