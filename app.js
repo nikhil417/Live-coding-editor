@@ -29,9 +29,8 @@ app.get("/", (req, res) => {
 
 app.post("/msg", (req, res) => {
   const { msg } = req.body;
-  query = `INSERT INTO messages (message) VALUES ('${msg}')`;
-
-  connection.query(query, function (err, rows, fields) {
+  query = "INSERT INTO messages (message) VALUES (?)";
+  connection.query(query, [msg], function (err, msg, rows, fields) {
     if (err) {
       if (msg.length > 255) {
         res.status(500).send("Char limit reched");
